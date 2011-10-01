@@ -1,9 +1,16 @@
 #ifndef RUN_MODES_HPP
 #define RUN_MODES_HPP
 
-void runLearningMode(const char *classifierFileName, const char *sampleSetDirectoryName, const char *coincidenceFileName);
-void runClassifyingMode(const char *classifierFileName, const char *sampleSetDirectoryName);  // TODO: arguments
-void runGraphicsMode();  // TODO: arguments
+void runTrainingMode(
+    const char *classifierFileName,
+    const char *sampleSetDirectoryName);
+
+void runClassifyingMode(
+    const char *classifierFileName,
+    const char *sampleSetDirectoryName,
+    const char *resultFileName);
+
+void runGraphicsMode();
 
 #endif  // RUN_MODES_HPP
 
