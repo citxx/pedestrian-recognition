@@ -5,9 +5,9 @@
 #include "runModes.hpp"
 
 void printUsage(const char *programName) {
-    std::cout << "Usage:  " << programName << "train sample_dir classifier_file"    << std::endl <<
-                 "        " << programName << "classify sample_dir classifier_file result_file" << std::endl <<
-                 "        " << programName << "[graphics]" << std::endl;
+    std::cout << "Usage:  " << programName << " train sample_dir classifier_file"    << std::endl <<
+                 "        " << programName << " classify sample_dir classifier_file result_file" << std::endl <<
+                 "        " << programName << " [graphics]" << std::endl;
 }
 
 int main(int argc, char *argv[]) {
