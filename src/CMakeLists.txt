@@ -10,6 +10,7 @@ set(SOURCES
     trainingMode.cpp
     classifyingMode.cpp
     graphicsMode.cpp
+    SampleSet.hpp
 )
 
 set(MOC_HEADERS
