@@ -4,6 +4,8 @@
 #include <QDir>
 
 class SampleSet {
+
+
   public:
     SampleSet(const QDir &directory);
 
