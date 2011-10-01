@@ -26,7 +26,7 @@ Signal2D::Signal2D(const QImage &img) {
 
     for (int x = 0; x < this->width(); x++) {
         for (int y = 0; y < this->height(); y++) {
-            this->at(x, y) = brightness(img.pixel(x, y));
+            this->at(x, y) = brightness(img.pixel(x, y)) / 255.0;
         }
     }
 }
@@ -218,4 +218,25 @@ Signal2D operator *(double a, const Signal2D &f) {
 
 Signal2D operator *(const Signal2D &f, double a) {
     return a * f;
+}
+
+QImage merge(const Signal2D &r, const Signal2D &g, const Signal2D &b) {
+    if (r.width() != g.width() || r.width() != b.width() ||
+        r.height() != g.height() || r.height() != b.height()) {
+        throw "merge: components r, g and b must have equal sizes";
+    }
+    else {
+        QImage result(r.width(), r.height(), QImage::Format_RGB32);
+
+        for (int x = 0; x < r.width(); x++) {
+            for (int y = 0; y < r.height(); y++) {
+                int vR = (int)(255 * qBound(0.0, r.at(x, y), 1.0));
+                int vG = (int)(255 * qBound(0.0, g.at(x, y), 1.0));
+                int vB = (int)(255 * qBound(0.0, b.at(x, y), 1.0));
+                result.setPixel(x, y, qRgb(vR, vG, vB));
+            }
+        }
+
+        return result;
+    }
 }

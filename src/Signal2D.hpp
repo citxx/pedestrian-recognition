@@ -43,4 +43,6 @@ Signal2D operator -(const Signal2D &f, const Signal2D &g);
 Signal2D operator *(double a, const Signal2D &f);
 Signal2D operator *(const Signal2D &f, double a);
 
+QImage merge(const Signal2D &r, const Signal2D &g, const Signal2D &b);
+
 #endif  // SIGNAL_2D_HPP
