@@ -11,6 +11,7 @@ set(SOURCES
     classifyingMode.cpp
     graphicsMode.cpp
     SampleSet.cpp
+    Signal2D.cpp
 )
 
 set(MOC_HEADERS
