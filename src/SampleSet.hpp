@@ -6,7 +6,7 @@ class SampleSet {
 
 
   public:
-    SampleSet(const char *directoryName, const char *resultFileName);
+    SampleSet(const char *directoryName, const char *resultFileName = "");
 
 };
 
