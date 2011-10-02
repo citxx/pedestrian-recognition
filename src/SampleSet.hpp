@@ -1,13 +1,12 @@
 #ifndef SAMPLE_SET_HPP
 #define SAMPLE_SET_HPP
 
-#include <QDir>
 
 class SampleSet {
 
 
   public:
-    SampleSet(const QDir &directory);
+    SampleSet(const char *directoryName, const char *resultFileName);
 
 };
 
