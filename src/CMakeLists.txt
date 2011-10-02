@@ -1,5 +1,6 @@
 add_definitions(-Wall -pedantic -O2)
 
+FIND_PACKAGE(OpenCV REQUIRED)
 FIND_PACKAGE(Qt4 REQUIRED)
 
 INCLUDE(${QT_USE_FILE})
@@ -11,7 +12,6 @@ set(SOURCES
     classifyingMode.cpp
     graphicsMode.cpp
     SampleSet.cpp
-    Signal2D.cpp
 )
 
 set(MOC_HEADERS
@@ -25,5 +25,5 @@ QT4_WRAP_UI(FORMS_HEADERS ${FORMS})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(psearch ${SOURCES} ${HEADERS} ${FORMS_HEADERS})
-target_link_libraries(psearch ${QT_LIBRARIES})
+target_link_libraries(psearch ${QT_LIBRARIES} ${OpenCV_LIBS})
 
