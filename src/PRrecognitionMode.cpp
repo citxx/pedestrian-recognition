@@ -1,7 +1,7 @@
 #include <iostream>
-#include "runModes.hpp"
+#include "PedestrianRecognition.hpp"
 
-void runClassifyingMode(
+void PedestrianRecognition::recognitionMode(
     const char *classifierFileName,
     const char *sampleSetDirectoryName,
     const char *resultFileName) {

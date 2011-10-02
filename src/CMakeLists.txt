@@ -8,9 +8,10 @@ add_definitions(${QT_DEFINITIONS})
 
 set(SOURCES
     main.cpp
-    trainingMode.cpp
-    classifyingMode.cpp
-    graphicsMode.cpp
+    PRmain.cpp
+    PRtrainingMode.cpp
+    PRrecognitionMode.cpp
+    PRgraphicsMode.cpp
     SampleSet.cpp
 )
 
