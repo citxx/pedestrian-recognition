@@ -5,7 +5,8 @@ class PedestrianRecognition {
 
     static void trainingMode(
         const char *classifierFileName,
-        const char *sampleSetDirectoryName
+        const char *sampleSetDirectoryName,
+        const char *resultFileName
     );
 
     static void recognitionMode(

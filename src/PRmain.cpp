@@ -5,17 +5,17 @@
 #include "PedestrianRecognition.hpp"
 
 static void printUsage(const char *programName) {
-    std::cout << "Usage:  " << programName << " train sample_dir result_file classifier_file"    << std::endl <<
-                 "        " << programName << " classify sample_dir result_file classifier_file result_file" << std::endl <<
+    std::cout << "Usage:  " << programName << " train classifier_file sample_dir result_file"    << std::endl <<
+                 "        " << programName << " recognize classifier_file sample_dir result_file" << std::endl <<
                  "        " << programName << " [graphics]" << std::endl;
 }
 
 int PedestrianRecognition::Main(int argc, char *argv[]) {
-    if (argc == 4 && strcmp(argv[1], "train") == 0) {
-        PedestrianRecognition::trainingMode(argv[3], argv[2]);
+    if (argc == 5 && strcmp(argv[1], "train") == 0) {
+        PedestrianRecognition::trainingMode(argv[2], argv[3], argv[4]);
     }
-    else if (argc == 5 && strcmp(argv[1], "classify") == 0) {
-        PedestrianRecognition::recognitionMode(argv[3], argv[2], argv[4]);
+    else if (argc == 5 && strcmp(argv[1], "recognize") == 0) {
+        PedestrianRecognition::recognitionMode(argv[2], argv[3], argv[4]);
     }
     else if (argc == 1 || (argc == 2 && strcmp(argv[1], "graphics") == 0)) {
         PedestrianRecognition::graphicsMode();

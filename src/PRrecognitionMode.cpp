@@ -4,7 +4,7 @@
 void PedestrianRecognition::recognitionMode(
     const char *classifierFileName,
     const char *sampleSetDirectoryName,
-    const char *resultFileName) {
-
-    std::cerr << "--- Classifying mode ---" << std::endl;
+    const char *resultFileName
+) {
+    std::cerr << "--- Recognition mode ---" << std::endl;
 }
