@@ -1,10 +1,12 @@
 add_definitions(-Wall -pedantic -O2)
 
 FIND_PACKAGE(OpenCV REQUIRED)
-FIND_PACKAGE(Qt4 REQUIRED)
 
-INCLUDE(${QT_USE_FILE})
-add_definitions(${QT_DEFINITIONS})
+set(LIBLINEAR_STATIC_LIBS
+    liblinear-1.8/blas/blas.a
+    liblinear-1.8/linear.o
+    liblinear-1.8/tron.o
+)
 
 set(SOURCES
     main.cpp
@@ -12,19 +14,10 @@ set(SOURCES
     PRtrainingMode.cpp
     PRrecognitionMode.cpp
     PRgraphicsMode.cpp
-    SampleSet.cpp
+    LinearSVM.cpp
 )
-
-set(MOC_HEADERS
-)
-
-set(FORMS
-)
-
-QT4_WRAP_CPP(HEADERS ${MOC_HEADERS})
-QT4_WRAP_UI(FORMS_HEADERS ${FORMS})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(psearch ${SOURCES} ${HEADERS} ${FORMS_HEADERS})
-target_link_libraries(psearch ${QT_LIBRARIES} ${OpenCV_LIBS})
+add_executable(psearch ${LIBLINEAR_STATIC_LIBS} ${SOURCES} ${HEADERS} ${FORMS_HEADERS})
+target_link_libraries(psearch ${OpenCV_LIBS})
 
