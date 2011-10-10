@@ -15,6 +15,7 @@ set(SOURCES
     PRrecognitionMode.cpp
     PRgraphicsMode.cpp
     LinearSVM.cpp
+    Rectangle.cpp
 )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
