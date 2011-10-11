@@ -22,6 +22,7 @@ set(SOURCES
     LinearSVM.cpp
     Rectangle.cpp
     ImageSet.cpp
+    Sample.cpp
 )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
