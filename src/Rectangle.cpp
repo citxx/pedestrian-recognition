@@ -1,6 +1,10 @@
 #include "Rectangle.hpp"
 
-Rectangle::Rectangle(int left, int top, int width, int height) {
+Rectangle::Rectangle(int left, int top, int width, int height):
+    left(left),
+    top(top),
+    width(width),
+    height(height) {
 }
 
 int Rectangle::left() {
