@@ -7,6 +7,8 @@
 #include "Histogram.hpp"
 
 const int HISTOGRAM_SIZE = 8;
+const int PATCH_WIDTH = 80;
+const int PATCH_HEIGHT = 200;
 
 class Sample {
     std::vector <std::vector <Histogram <HISTOGRAM_SIZE> > > histogram;

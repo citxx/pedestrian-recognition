@@ -40,7 +40,7 @@ LinearSVM::LinearSVM(std::vector <std::vector <double> > descriptors, std::vecto
     this->modelSVM = train(&task, &properties);
 
     delete []task.y;
-    for (int i = 0; i < task.n; i++) {
+    for (int i = 0; i < task.l; i++) {
         delete task.x[i];
     }
     delete []task.x;

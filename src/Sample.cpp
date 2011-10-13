@@ -2,9 +2,8 @@
 #include <cmath>
 
 #include "Sample.hpp"
+#include "debug.hpp"
 
-const int PATCH_WIDTH = 80;
-const int PATCH_HEIGHT = 200;
 const int SQUARE_SIZE = 8;
 
 Sample::Sample(cv::Mat image) {
@@ -12,11 +11,11 @@ Sample::Sample(cv::Mat image) {
         std::cerr << "Invalid sample image" << std::endl;
         throw "Invalid sample image";
     }
-
     this->histogram.assign(image.cols + 1, std::vector <Histogram <HISTOGRAM_SIZE> >(image.rows / SQUARE_SIZE));
 
-    cv::Mat gray, xGrad, yGrad;
-    cv::cvtColor(image, gray, CV_RGB2GRAY);
+    cv::Mat rawGray, gray, xGrad, yGrad;
+    cv::cvtColor(image, rawGray, CV_RGB2GRAY);
+    rawGray.convertTo(gray, CV_64F);
 
     double mXSobel[3][3] = {
         {-1,  0,  1},
@@ -28,7 +27,6 @@ Sample::Sample(cv::Mat image) {
 
     cv::filter2D(gray, xGrad, -1, xSobel);
     cv::filter2D(gray, yGrad, -1, ySobel);
-
     int trueRows = (image.rows / SQUARE_SIZE) * SQUARE_SIZE;
     for (int row = 0; row < trueRows; row++) {
         double *xRowPtr = xGrad.ptr <double>(row);
@@ -50,7 +48,7 @@ Sample::Sample(cv::Mat image) {
 }
 
 int Sample::maximalShift() const {
-    return (int)this->histogram.size() - 1 - PATCH_WIDTH;
+    return (int)this->histogram.size() - PATCH_WIDTH;
 }
 
 std::vector <double> Sample::getDescriptor(int x) const {

@@ -14,18 +14,14 @@ set(LIBLINEAR_STATIC_LIBS
 )
 
 set(SOURCES
-    main.cpp
-    PRmain.cpp
-    PRtrainingMode.cpp
-    PRrecognitionMode.cpp
-    PRgraphicsMode.cpp
     LinearSVM.cpp
     Rectangle.cpp
     ImageSet.cpp
+    PatchPositions.cpp
     Sample.cpp
 )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(psearch ${LIBLINEAR_STATIC_LIBS} ${SOURCES} ${HEADERS} ${FORMS_HEADERS})
-target_link_libraries(psearch ${OpenCV_LIBS})
-target_link_libraries(psearch ${Boost_LIBRARIES})
+add_executable(train train.cpp ${LIBLINEAR_STATIC_LIBS} ${SOURCES})
+target_link_libraries(train ${OpenCV_LIBS})
+target_link_libraries(train ${Boost_LIBRARIES})

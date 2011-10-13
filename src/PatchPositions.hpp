@@ -3,11 +3,12 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
 #include "Rectangle.hpp"
 
 class PatchPositions {
-    std::map <std::string, Rectangle> position;
+    std::multimap <std::string, Rectangle> position;
 
   public:
     PatchPositions();
