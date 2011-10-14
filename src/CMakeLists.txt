@@ -25,3 +25,8 @@ add_executable(show show.cpp ${SOURCES})
 target_link_libraries(show ${OpenCV_LIBS})
 target_link_libraries(show ${Boost_LIBRARIES})
 target_link_libraries(show -lblas -llinear)
+
+add_executable(classify classify.cpp ${SOURCES})
+target_link_libraries(classify ${OpenCV_LIBS})
+target_link_libraries(classify ${Boost_LIBRARIES})
+target_link_libraries(classify -lblas -llinear)

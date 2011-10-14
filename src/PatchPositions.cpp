@@ -18,7 +18,6 @@ PatchPositions::PatchPositions(std::string fileName) {
     }
 }
 
-
 void PatchPositions::addPosition(std::string name, Rectangle rect) {
     this->position.insert(std::pair <std::string, Rectangle>(name, rect));
 }
