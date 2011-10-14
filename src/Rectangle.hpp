@@ -16,6 +16,10 @@ class Rectangle {
     int bottom() const;
     int width() const;
     int height() const;
+
+    friend bool operator ==(const Rectangle &a, const Rectangle &b);
 };
+
+bool operator ==(const Rectangle &a, const Rectangle &b);
 
 #endif  // RECTANGLE_HPP

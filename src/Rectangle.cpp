@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "Rectangle.hpp"
 
 Rectangle::Rectangle(int left, int top, int width, int height):
@@ -38,5 +40,9 @@ int Rectangle::height() const {
     return this->_height;
 }
 
-
-
+bool operator ==(const Rectangle &a, const Rectangle &b) {
+    return std::abs(a._left - b._left) <= 40 &&
+           a._top == b._top &&
+           a._width == b._width &&
+           a._height == b._height;
+}

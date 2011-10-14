@@ -15,11 +15,13 @@ PatchPositions::PatchPositions(std::string fileName) {
         this->position.insert(
             std::pair <std::string, Rectangle>(name, Rectangle(left, top, right - left, bottom - top))
         );
+        this->names.insert(name);
     }
 }
 
 void PatchPositions::addPosition(std::string name, Rectangle rect) {
     this->position.insert(std::pair <std::string, Rectangle>(name, rect));
+    this->names.insert(name);
 }
 
 void PatchPositions::save(std::string fileName) const {
@@ -47,3 +49,6 @@ std::vector <Rectangle> PatchPositions::getPositions(std::string name) const {
     return answer;
 }
 
+std::vector <std::string> PatchPositions::getNames() const {
+    return std::vector <std::string>(this->names.begin(), this->names.end());
+}

@@ -30,3 +30,8 @@ add_executable(classify classify.cpp ${SOURCES})
 target_link_libraries(classify ${OpenCV_LIBS})
 target_link_libraries(classify ${Boost_LIBRARIES})
 target_link_libraries(classify -lblas -llinear)
+
+add_executable(quality quality.cpp ${SOURCES})
+target_link_libraries(quality ${OpenCV_LIBS})
+target_link_libraries(quality ${Boost_LIBRARIES})
+target_link_libraries(quality -lblas -llinear)
