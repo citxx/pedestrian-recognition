@@ -50,7 +50,7 @@ std::vector <std::string> ImageSet::getNames() const {
         boost::filesystem::directory_iterator file(dirPath), end;
         while (file != end) {
             if (boost::filesystem::is_regular_file(*file) && file->path().extension() == ".png") {
-                std::string name = file->path().filename();
+                std::string name = file->path().filename().string();
                 answer.push_back(name.substr(0, name.length() - 4));
             }
 

@@ -7,12 +7,6 @@ find_package(OpenCV REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
-set(LIBLINEAR_STATIC_LIBS
-    liblinear-1.8/blas/blas.a
-    liblinear-1.8/linear.o
-    liblinear-1.8/tron.o
-)
-
 set(SOURCES
     LinearSVM.cpp
     Rectangle.cpp
@@ -22,6 +16,12 @@ set(SOURCES
 )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(train train.cpp ${LIBLINEAR_STATIC_LIBS} ${SOURCES})
+add_executable(train train.cpp ${SOURCES})
 target_link_libraries(train ${OpenCV_LIBS})
 target_link_libraries(train ${Boost_LIBRARIES})
+target_link_libraries(train -lblas -llinear)
+
+add_executable(show show.cpp ${SOURCES})
+target_link_libraries(show ${OpenCV_LIBS})
+target_link_libraries(show ${Boost_LIBRARIES})
+target_link_libraries(show -lblas -llinear)

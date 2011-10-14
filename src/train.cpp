@@ -1,16 +1,16 @@
-#include <iostream>
-#include <cstring>
-#include <cstdlib>
-#include <vector>
-#include <string>
 #include <algorithm>
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <string>
+#include <vector>
 
-#include "ImageSet.hpp"
-#include "PatchPositions.hpp"
-#include "Sample.hpp"
-#include "LinearSVM.hpp"
-#include "Rectangle.hpp"
 #include "debug.hpp"
+#include "ImageSet.hpp"
+#include "LinearSVM.hpp"
+#include "PatchPositions.hpp"
+#include "Rectangle.hpp"
+#include "Sample.hpp"
 
 #define ANSWER_PEDESTRIAN 1
 #define ANSWER_BACKGROUND -1
@@ -22,15 +22,15 @@ static void printUsage(const char *programName) {
     std::cout << "    " << programName << " sample_dir result_file [classifier_file]" << std::endl;
     std::cout << std::endl;
     std::cout << "Examples:" << std::endl;
-    std::cout << "    1) $ " << programName << " train\\train-processed.idl" << std::endl;
-    std::cout << "       Writes model to stdout" << std::endl;
-    std::cout << "    2) $ " << programName << " train\\train-processed.idl model.txt" << std::endl;
-    std::cout << "       Writes model to 'model.txt' file" << std::endl;
+    std::cout << "    1) $ " << programName << " train train\\train-processed.idl" << std::endl;
+    std::cout << "       Write model to stdout" << std::endl;
+    std::cout << "    2) $ " << programName << " train train\\train-processed.idl model.txt" << std::endl;
+    std::cout << "       Write model to 'model.txt' file" << std::endl;
 }
 
 int main(int argc, char *argv[]) {
     srand(argc * 17);
-    if (/*argc != 3 &&*/ argc != 4) {  // TODO: unimplemented case
+    if (/*argc != 3 &&*/ argc != 4) {  // TODO: non-implemented case
         printUsage(argv[0]);
         exit(EXIT_FAILURE);
     }
@@ -49,10 +49,12 @@ int main(int argc, char *argv[]) {
             std::vector <std::string> names = images.getNames();
             std::vector <std::vector <double> > descriptorSet;
             std::vector <int> answerSet;
-            std::cerr << names.size() << std::endl;
+            std::cerr << names.size() << " files are found." << std::endl;
+            int progress = 0;
             for (std::vector <std::string>::iterator imageName = names.begin();
                  imageName != names.end();
                  ++imageName) {
+                progress += 1;
                 Sample sample(images.getImage(*imageName));
 
                 std::vector <Rectangle> pRects = result.getPositions(*imageName);
@@ -63,7 +65,7 @@ int main(int argc, char *argv[]) {
                 std::sort(pPos.begin(), pPos.end());
 
                 // Pedestrian patches
-                std::cerr << *imageName << " " << pPos.size() << std::endl;
+                std::cerr << "\b\b\b\b\b" << 100 * progress / names.size() << " %";
                 for (std::vector <int>::iterator pos = pPos.begin(); pos != pPos.end(); ++pos) {
                     descriptorSet.push_back(sample.getDescriptor(*pos));
                     answerSet.push_back(ANSWER_PEDESTRIAN);
@@ -95,9 +97,10 @@ int main(int argc, char *argv[]) {
                         }
                     }
                     descriptorSet.push_back(sample.getDescriptor(x));
-                    answerSet.push_back(ANSWER_PEDESTRIAN);
+                    answerSet.push_back(ANSWER_BACKGROUND);
                 }
             }
+            std::cerr << "\b\b\b\b\b";
 
             std::cerr << "There are " << descriptorSet.size() << " pathces." << std::endl;
 
@@ -105,6 +108,7 @@ int main(int argc, char *argv[]) {
         }
         catch (const char *e) {
             std::cerr << "Error: " << e << std::endl;
+            exit(EXIT_FAILURE);
         }
     }
 
