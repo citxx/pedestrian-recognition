@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
 
             std::cerr << "There are " << descriptorSet.size() << " pathces." << std::endl;
 
-            LinearSVM(descriptorSet, answerSet).save(modelFile);
+            LinearSVM(descriptorSet, answerSet, 1.0).save(modelFile);
         }
         catch (const char *e) {
             std::cerr << "Error: " << e << std::endl;

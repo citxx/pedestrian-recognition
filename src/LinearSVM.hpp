@@ -8,7 +8,10 @@ class LinearSVM {
     struct model *modelSVM;
 
   public:
-    LinearSVM(std::vector <std::vector <double> > descriptor, std::vector <int> answers);
+    LinearSVM(std::vector <std::vector <double> > descriptor,
+              std::vector <int> answers,
+              double violationCost
+    );
     LinearSVM(std::string fileName);
     ~LinearSVM();
 

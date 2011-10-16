@@ -3,7 +3,10 @@
 
 #include "LinearSVM.hpp"
 
-LinearSVM::LinearSVM(std::vector <std::vector <double> > descriptors, std::vector <int> answers) {
+LinearSVM::LinearSVM(std::vector <std::vector <double> > descriptors,
+                     std::vector <int> answers,
+                     double violationCost
+                    ) {
     if (descriptors.size() != answers.size()) {
         throw "LinearSVM: 'descriptors' and 'answers' vectors should have the same size";
     }
@@ -33,7 +36,7 @@ LinearSVM::LinearSVM(std::vector <std::vector <double> > descriptors, std::vecto
 
     struct parameter properties;
     properties.solver_type = L2R_L2LOSS_SVC_DUAL;
-    properties.C = 1;
+    properties.C = violationCost;
     properties.eps = 1e-4;
     properties.nr_weight = 0;
     properties.weight_label = NULL;
