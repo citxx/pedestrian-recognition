@@ -16,7 +16,7 @@
 
 static void printUsage(const char *programName) {
     std::cout << "Usage:" << std::endl;
-    std::cout << "    " << programName << " sample_file [classifier_file]" << std::endl;
+    std::cout << "    " << programName << " sample_file classifier_file" << std::endl;
     std::cout << std::endl;
     std::cout << "Examples:" << std::endl;
     std::cout << "    1) $ " << programName << " image.png" << std::endl;

@@ -17,6 +17,8 @@ Sample::Sample(cv::Mat image) {
     cv::Mat rawGray, gray, xGrad, yGrad;
     cv::cvtColor(image, rawGray, CV_RGB2GRAY);
     rawGray.convertTo(gray, CV_64F);
+    cv::GaussianBlur(gray, gray, cv::Size(7, 7), 0);
+
 
     double mXSobel[3][3] = {
         {-1,  0,  1},
