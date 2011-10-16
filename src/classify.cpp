@@ -11,6 +11,7 @@
 #include "ImageSet.hpp"
 #include "LinearSVM.hpp"
 #include "PatchPositions.hpp"
+#include "Processing.hpp"
 #include "Rectangle.hpp"
 #include "Sample.hpp"
 
@@ -55,21 +56,21 @@ int main(int argc, char *argv[]) {
             std::vector <std::string> names = images.getNames();
             std::cerr << names.size() << " files are found." << std::endl;
 
-            debug("Processing images...");
+            std::cerr << "Processing images..." << std::endl;
             int progress = 0;
             for (std::vector <std::string>::iterator name = names.begin(); name != names.end(); ++name) {
                 progress += 1;
                 std::cerr << "\b\b\b\b\b" << 100 * progress / names.size() << " %";
+                debug("");
 
                 Sample sample(images.getImage(*name));
-                for (int x = 0; x < sample.maximalShift(); x += PATCH_STEP) {
-                    int answer = classifier.classify(sample.getDescriptor(x));
-                    if (answer == ANSWER_PEDESTRIAN) {
-                        result.addPosition(*name, Rectangle(x, 0, PATCH_WIDTH, PATCH_HEIGHT));
-                    }
+
+                std::vector <int> matches = Processing::processSample(sample, &classifier);
+                for (std::vector <int>::iterator it = matches.begin(); it != matches.end(); ++it) {
+                    result.addPosition(*name, Rectangle(*it, 0, PATCH_WIDTH, PATCH_HEIGHT));
                 }
             }
-            debug("\b\b\b\b\bDone.");
+            std::cerr << "\b\b\b\b\bDone." << std::endl;
 
             result.save(resultFile);
         }

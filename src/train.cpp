@@ -13,7 +13,7 @@
 #include "Sample.hpp"
 
 #define ANSWER_PEDESTRIAN 1
-#define ANSWER_BACKGROUND -1
+#define ANSWER_BACKGROUND 0
 
 #define BACKGROUND_PER_SAMPLE 3
 

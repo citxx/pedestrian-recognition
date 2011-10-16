@@ -63,14 +63,14 @@ LinearSVM::~LinearSVM() {
 }
 
 
-void LinearSVM::save(std::string fileName) {
+void LinearSVM::save(std::string fileName) const {
     int status = save_model(fileName.c_str(), this->modelSVM);
     if (status) {
         throw "LinearSVM: Can't save the model to the file";
     }
 }
 
-int LinearSVM::classify(std::vector <double> descriptor, double *estimate) {
+int LinearSVM::classify(std::vector <double> descriptor, double *estimate) const {
     struct feature_node *x = new struct feature_node[descriptor.size() + 1];
     x[descriptor.size()].index = -1;
     for (int i = 0; i < (int)descriptor.size(); i++) {
