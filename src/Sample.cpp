@@ -1,8 +1,9 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
-#include "Sample.hpp"
+#include "Chi2Kernel.hpp"
 #include "debug.hpp"
+#include "Sample.hpp"
 
 const int SQUARE_SIZE = 8;
 
@@ -63,5 +64,5 @@ std::vector <double> Sample::getDescriptor(int x) const {
         }
     }
 
-    return answer;
+    return Chi2Kernel(1, 0.4).transform(answer);
 }

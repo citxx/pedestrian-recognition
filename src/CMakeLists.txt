@@ -14,6 +14,7 @@ set(SOURCES
     PatchPositions.cpp
     Sample.cpp
     Processing.cpp
+    Chi2Kernel.cpp
 )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
