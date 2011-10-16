@@ -72,10 +72,10 @@ int main(int argc, char *argv[]) {
                 }
 
                 // Background patches
-                std::vector <bool> isAllowed(sample.maximalShift() + 1, true);
+                std::vector <bool> isAllowed(sample.maximalShift(), true);
                 for (std::vector <int>::iterator pos = pPos.begin(); pos != pPos.end(); ++pos) {
                     int start = std::max(0, *pos - PATCH_WIDTH / 2);
-                    int end = std::min(*pos + PATCH_WIDTH / 2, sample.maximalShift() + 1);
+                    int end = std::min(*pos + PATCH_WIDTH / 2, (int)isAllowed.size());
                     for (int i = start; i < end; i++) {
                         isAllowed[i] = false;
                     }
@@ -86,18 +86,19 @@ int main(int argc, char *argv[]) {
                         bgCount += 1;
                     }
                 }
-
-                for (int bgNum = 0; bgNum < BACKGROUND_PER_SAMPLE; bgNum++) {
-                    int number = rand() % bgCount;
-                    int x = -1;
-                    while (number > 0 || !isAllowed[x]) {
-                        x += 1;
-                        if (isAllowed[x]) {
+                if (bgCount != 0) {
+                    for (int bgNum = 0; bgNum < BACKGROUND_PER_SAMPLE; bgNum++) {
+                        int number = rand() % bgCount + 1;
+                        int x = 0;
+                        do {
+                            while (!isAllowed[x]) {
+                                x += 1;
+                            }
                             number -= 1;
-                        }
+                        } while (number > 0);
+                        descriptorSet.push_back(sample.getDescriptor(x));
+                        answerSet.push_back(ANSWER_BACKGROUND);
                     }
-                    descriptorSet.push_back(sample.getDescriptor(x));
-                    answerSet.push_back(ANSWER_BACKGROUND);
                 }
             }
             std::cerr << "\b\b\b\b\b";
