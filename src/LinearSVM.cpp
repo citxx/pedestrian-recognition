@@ -79,6 +79,9 @@ int LinearSVM::classify(std::vector <double> descriptor, double *estimate) const
     }
     double realEstimate;
     int label = predict_values(this->modelSVM, x, &realEstimate);
+
+    delete []x;
+
     if (estimate != NULL) *estimate = std::abs(realEstimate);
     return label;
 }
