@@ -1,7 +1,12 @@
-#include "liblinear-1.8/linear.h"
+#include <linear.h>
+#include <cmath>
+
 #include "LinearSVM.hpp"
 
-LinearSVM::LinearSVM(std::vector <std::vector <double> > descriptors, std::vector <int> answers) {
+LinearSVM::LinearSVM(std::vector <std::vector <double> > descriptors,
+                     std::vector <int> answers,
+                     double violationCost
+                    ) {
     if (descriptors.size() != answers.size()) {
         throw "LinearSVM: 'descriptors' and 'answers' vectors should have the same size";
     }
@@ -31,7 +36,7 @@ LinearSVM::LinearSVM(std::vector <std::vector <double> > descriptors, std::vecto
 
     struct parameter properties;
     properties.solver_type = L2R_L2LOSS_SVC_DUAL;
-    properties.C = 1;
+    properties.C = violationCost;
     properties.eps = 1e-4;
     properties.nr_weight = 0;
     properties.weight_label = NULL;
@@ -58,19 +63,22 @@ LinearSVM::~LinearSVM() {
 }
 
 
-void LinearSVM::save(std::string fileName) {
+void LinearSVM::save(std::string fileName) const {
     int status = save_model(fileName.c_str(), this->modelSVM);
     if (status) {
         throw "LinearSVM: Can't save the model to the file";
     }
 }
 
-int LinearSVM::classify(std::vector <double> descriptor) {
+int LinearSVM::classify(std::vector <double> descriptor, double *estimate) const {
     struct feature_node *x = new struct feature_node[descriptor.size() + 1];
     x[descriptor.size()].index = -1;
     for (int i = 0; i < (int)descriptor.size(); i++) {
         x[i].index = i + 1;
         x[i].value = descriptor[i];
     }
-    return predict(this->modelSVM, x);
+    double realEstimate;
+    int label = predict_values(this->modelSVM, x, &realEstimate);
+    if (estimate != NULL) *estimate = std::abs(realEstimate);
+    return label;
 }

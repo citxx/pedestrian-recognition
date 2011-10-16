@@ -13,6 +13,7 @@ set(SOURCES
     ImageSet.cpp
     PatchPositions.cpp
     Sample.cpp
+    Processing.cpp
 )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 

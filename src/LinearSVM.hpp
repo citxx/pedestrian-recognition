@@ -8,12 +8,15 @@ class LinearSVM {
     struct model *modelSVM;
 
   public:
-    LinearSVM(std::vector <std::vector <double> > descriptor, std::vector <int> answers);
+    LinearSVM(std::vector <std::vector <double> > descriptor,
+              std::vector <int> answers,
+              double violationCost
+    );
     LinearSVM(std::string fileName);
     ~LinearSVM();
 
-    void save(std::string fileName);
-    int classify(std::vector <double> descriptor);
+    void save(std::string fileName) const;
+    virtual int classify(std::vector <double> descriptor, double *estimate = NULL) const;
 };
 
 #endif  // LINEAR_SVM_HPP

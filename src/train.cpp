@@ -13,7 +13,7 @@
 #include "Sample.hpp"
 
 #define ANSWER_PEDESTRIAN 1
-#define ANSWER_BACKGROUND -1
+#define ANSWER_BACKGROUND 0
 
 #define BACKGROUND_PER_SAMPLE 3
 
@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
 
             std::cerr << "There are " << descriptorSet.size() << " pathces." << std::endl;
 
-            LinearSVM(descriptorSet, answerSet).save(modelFile);
+            LinearSVM(descriptorSet, answerSet, 1.0).save(modelFile);
         }
         catch (const char *e) {
             std::cerr << "Error: " << e << std::endl;

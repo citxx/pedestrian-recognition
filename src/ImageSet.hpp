@@ -5,8 +5,6 @@
 #include <vector>
 #include <opencv/cv.h>
 
-#include "liblinear-1.8/linear.h"
-
 class ImageSet {
     std::string directoryName;
 
