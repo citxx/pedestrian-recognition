@@ -11,9 +11,23 @@ Bootstrapping: −
 Нелинейный классификатор: +
 Скользящий контроль: −
 
-Система: Geany, g++, CMake, Qt Designer
+Система: Geany, g++, CMake
 ОС: Ubuntu 11.04
 Аппаратура: Intel Core 2 Duo 1.3GHz, 3Gb, nVidia GeForce G210M 512Mb
 
-Комментарии: нет
+Комментарии:
+
+Проект состоит из четырёх исполняемых файлов: train.exe, classify.exe, show.exe и quality.exe.
+1) train.exe sample_dir result_file model.txt
+    Обучает классификатор на изображениях из директории sample_dir и записывает в файл model.txt, используя файл result_file с локациями пешеходов.
+2) classify.exe sample_dir result_file model.txt
+    Ищет пешеходов на изображениях из директории sample_dir, используя модель из файла model.txt, и записывает результат в файл result_file.
+3) show.exe image_file model.txt
+    Распознаёт пешеходов на изображении image_file, используя модель из файла model.txt, и показывает исходное изображение с выделенными на нём распознанными патчами.
+4) quality.exe check_result true_result
+    Сравнивает файл с результатами работы классификатора check_result и файл с верными результатами true_result и выводит на экран значения точности (recall) и полноты (precision) классификатора.
+
+Модель model.txt получена тренировкой классификатора исполняемым файлом train.exe.
+
+В работе классификатора используется предобработка фильтром Гаусса размером 7x7, нелинейное хи квадрат ядро с параметром n = 1 и шагом 0.4.
 
