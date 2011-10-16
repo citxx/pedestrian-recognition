@@ -1,7 +1,7 @@
 #ifndef DEBUG_HPP
 #define DEBUG_HPP
 
-#define DEBUG_MODE
+// #define DEBUG_MODE
 
 #ifdef DEBUG_MODE
 
