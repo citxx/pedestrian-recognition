@@ -13,7 +13,7 @@ class LinearSVM {
     ~LinearSVM();
 
     void save(std::string fileName);
-    int classify(std::vector <double> descriptor);
+    virtual int classify(std::vector <double> descriptor, double *estimate = NULL);
 };
 
 #endif  // LINEAR_SVM_HPP

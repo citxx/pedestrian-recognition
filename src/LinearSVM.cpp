@@ -1,4 +1,6 @@
-#include "liblinear-1.8/linear.h"
+#include <linear.h>
+#include <cmath>
+
 #include "LinearSVM.hpp"
 
 LinearSVM::LinearSVM(std::vector <std::vector <double> > descriptors, std::vector <int> answers) {
@@ -65,12 +67,15 @@ void LinearSVM::save(std::string fileName) {
     }
 }
 
-int LinearSVM::classify(std::vector <double> descriptor) {
+int LinearSVM::classify(std::vector <double> descriptor, double *estimate) {
     struct feature_node *x = new struct feature_node[descriptor.size() + 1];
     x[descriptor.size()].index = -1;
     for (int i = 0; i < (int)descriptor.size(); i++) {
         x[i].index = i + 1;
         x[i].value = descriptor[i];
     }
-    return predict(this->modelSVM, x);
+    double realEstimate;
+    int label = predict_values(this->modelSVM, x, &realEstimate);
+    if (estimate != NULL) *estimate = std::abs(realEstimate);
+    return label;
 }
