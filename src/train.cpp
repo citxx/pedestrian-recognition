@@ -89,8 +89,9 @@ int main(int argc, char *argv[]) {
                 if (bgCount != 0) {
                     for (int bgNum = 0; bgNum < BACKGROUND_PER_SAMPLE; bgNum++) {
                         int number = rand() % bgCount + 1;
-                        int x = 0;
+                        int x = -1;
                         do {
+                            x += 1;
                             while (!isAllowed[x]) {
                                 x += 1;
                             }
